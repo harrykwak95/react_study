@@ -5,9 +5,27 @@
     </body>
     <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-    <script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
         const root = document.getElementById("root");
-        const span = React.createElement("span", {id:"dragon"}, "hi");
-        ReactDOM.render(span, root);
+
+        const Title = () => (
+            <h3 id="title" onMouseEnter={()=>console.log('test')} >
+                Hello Title
+            </h3>
+        )
+
+        const Button = () => (
+            <button id="click_test" onClick={()=>console.log('super')}>click</button>
+        )
+
+
+        const Container = () => (
+            <div>
+                <Title/>
+                <Button/>
+            </div>
+        )
+        ReactDOM.render(<Container/>, root);
     </script>
 </html>
