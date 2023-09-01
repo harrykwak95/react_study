@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <div id="root"></div>
+    </body>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        function App () {
+            let [counter, setCounter] = React.useState(0);
+            function countUp(){
+                setCounter(counter+1);
+            }
+            return (
+                <div>
+                    <h1>Total : {counter}</h1>
+                    <button onClick={countUp}>count</button>
+                </div>
+                )
+        }
+
+        function render (){
+            ReactDOM.render(<App/>, root);
+        }
+        const root = document.getElementById('root');
+        render();
+    </script>
+</html>
