@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <div id="root"></div>
+    </body>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        function TimeConverter () {
+            let [minutes, setMinutes] = React.useState(0);
+            let [hours, setHours] = React.useState(0);
+            let [minutesOrHours, setMinutesOrHours] = React.useState(true);
+            
+            const minutesChange = () => {
+                let current = event.target.value;
+                setMinutes(current);
+                setHours(Math.round(current/60));
+            }
+
+            const hoursChange = () => {
+                let current = event.target.value;
+                setHours(current);
+                setMinutes(current*60);
+            }
+
+            const changeState = () => {
+                setMinutesOrHours(!minutesOrHours);
+            }
+
+            const reset = () => {
+                setHours(0);
+                setMinutes(0);
+            }
+
+
+            return (
+                <div>
+                    분 <input onChange={minutesChange} id="minutes" type="number" value={minutes} disabled={!minutesOrHours}/>
+                    시 <input onChange={hoursChange} id="hours" type="number" value={hours} disabled={minutesOrHours}/>
+                    <button onClick={reset}>reset</button>
+                    <button onClick={changeState}>change</button>
+                </div>
+                )
+        }
+
+        function DistanceConverter () {
+            let [miles, setMiles] = React.useState(0);
+            let [kilos, setKilos] = React.useState(0);
+            let [minutesOrHours, setMinutesOrHours] = React.useState(true);
+            
+            const milesChange = () => {
+                let current = event.target.value;
+                setMiles(current);
+                setKilos(current*(1.6));
+            }
+
+            const kilosChange = () => {
+                let current = event.target.value;
+                setKilos(current);
+                setMiles(current*(0.62));
+            }
+
+            const changeState = () => {
+                setMinutesOrHours(!minutesOrHours);
+            }
+
+            const reset = () => {
+                setKilos(0);
+                setMiles(0);
+            }
+
+
+            return (
+                <div>
+                    마일 <input onChange={milesChange} id="miles" type="number" value={miles} disabled={!minutesOrHours}/>
+                    킬로 <input onChange={kilosChange} id="hours" type="number" value={kilos} disabled={minutesOrHours}/>
+                    <button onClick={reset}>reset</button>
+                    <button onClick={changeState}>change</button>
+                </div>
+                )
+        }
+        function App () {
+            const [index, setIndex] = React.useState("x");
+            const chageSelect = (event) => {
+                setIndex(event.target.value)
+            }
+            return (
+                <div>
+                    <h1>Converter</h1>
+                    <select value={index} onChange={chageSelect}>
+                        <option value="x">선택</option>
+                        <option value="0">시간</option>
+                        <option value="1">거리</option>
+                    </select>
+                    {index === "x" ? "유범이" : null}
+                    {index === "0" ? <TimeConverter/> : null}
+                    {index === "1" ? <DistanceConverter/> : null}
+                </div>
+                )
+        }
+
+        function render (){
+            ReactDOM.render(<App/>, root);
+        }
+        const root = document.getElementById('root');
+        render();
+    </script>
+</html>
