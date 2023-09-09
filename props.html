@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <div id="root"></div>
+    </body>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
+    <script type="text/babel">
+        function Btn({text, value, changeValue}){
+            return (
+                <button
+                onClick={changeValue}
+                style={{
+                    backgroundColor:"orange",
+                    color:"white",
+                    padding:"10px 20px",
+                    border:0,
+                    borderRadius: 10
+                }}>
+                {text}
+                </button>
+            )
+
+        }
+
+
+        function App () {
+            const MemorizedBtn = React.memo(Btn);
+
+            MemorizedBtn.propTypes = {
+                text: PropTypes.string,
+                count: PropTypes.number,
+
+            }
+
+            const [value, setValue] = React.useState('test');
+            const changeValue = () => {setValue('change bitch'); }
+            return (
+                <div>
+                    <MemorizedBtn text={value} count={1} changeValue={changeValue}/>
+                    <MemorizedBtn text={"test"} count={2} changeValue={changeValue}/>
+                </div>
+                )
+        }
+
+        function render (){
+            ReactDOM.render(<App/>, root);
+        }
+        const root = document.getElementById('root');
+        render();
+    </script>
+</html>
